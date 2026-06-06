@@ -37,13 +37,14 @@ export function Welcome(): JSX.Element {
       <div className="mx-auto max-w-2xl">
         <div className="mb-8 text-center">
           <div className="mb-6 flex justify-center">
-            <div className="inline-block rounded-2xl bg-mc-accent-light p-4">
+            <div className="inline-block overflow-hidden rounded-2xl bg-mc-accent-light p-4">
               <img
                 src="/pwa-512x512.png"
                 alt="Money Clarity OS"
                 width={120}
                 height={120}
-                className="block"
+                className="block rounded-xl"
+                style={{ imageRendering: 'crisp-edges' }}
               />
             </div>
           </div>
