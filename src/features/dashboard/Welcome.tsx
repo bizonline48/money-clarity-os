@@ -37,15 +37,40 @@ export function Welcome(): JSX.Element {
       <div className="mx-auto max-w-2xl">
         <div className="mb-8 text-center">
           <div className="mb-6 flex justify-center">
-            <div className="inline-block overflow-hidden rounded-2xl bg-mc-accent-light p-4">
-              <img
-                src="/pwa-512x512.png"
-                alt="Money Clarity OS"
-                width={120}
-                height={120}
-                className="block rounded-xl"
-                style={{ imageRendering: 'crisp-edges' }}
-              />
+            <div className="inline-block rounded-2xl bg-mc-accent-light p-4">
+              <svg
+                width="120"
+                height="120"
+                viewBox="0 0 100 100"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+                aria-label="Money Clarity OS"
+              >
+                <circle
+                  cx="50"
+                  cy="50"
+                  r="40"
+                  stroke="#16653A"
+                  strokeWidth="3"
+                  fill="none"
+                />
+                <polyline
+                  points="25,65 35,55 45,60 55,45 65,50 75,35"
+                  stroke="#16653A"
+                  strokeWidth="3"
+                  fill="none"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                />
+                <polyline
+                  points="75,35 75,42 68,35"
+                  stroke="#16653A"
+                  strokeWidth="3"
+                  fill="none"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                />
+              </svg>
             </div>
           </div>
 
