@@ -37,13 +37,15 @@ export function Welcome(): JSX.Element {
       <div className="mx-auto max-w-2xl">
         <div className="mb-8 text-center">
           <div className="mb-6 flex justify-center">
-            <img
-              src="/pwa-512x512.png"
-              alt="Money Clarity OS"
-              width={120}
-              height={120}
-              className="rounded-mc-lg"
-            />
+            <div className="inline-block rounded-2xl bg-mc-accent-light p-4">
+              <img
+                src="/pwa-512x512.png"
+                alt="Money Clarity OS"
+                width={120}
+                height={120}
+                className="block"
+              />
+            </div>
           </div>
 
           <h1 className="mb-3 text-4xl font-bold text-mc-text-1">
