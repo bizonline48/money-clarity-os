@@ -10,8 +10,8 @@ import { formatCurrency } from '../../services/money';
 import { Budget } from '../../types';
 import { BudgetForm } from './BudgetForm';
 import { FREE_TIER_LIMITS } from '../../lib/constants';
-import { useToast } from '../../design-system/components/Toast';
 import { startOfMonth, endOfMonth } from 'date-fns';
+import { ProUpgradeModal } from '../settings/ProUpgradeModal';
 
 interface BudgetWithDetails extends Budget {
   categoryName: string;
@@ -23,10 +23,10 @@ interface BudgetWithDetails extends Budget {
 export function BudgetList(): JSX.Element {
   const [budgets, setBudgets] = useState<BudgetWithDetails[]>([]);
   const [isFormOpen, setIsFormOpen] = useState(false);
+  const [showProModal, setShowProModal] = useState(false);
   const [currency, setCurrency] = useState('SGD');
   const [isPro, setIsPro] = useState(false);
   const [budgetCount, setBudgetCount] = useState(0);
-  const toast = useToast();
 
   const loadData = async () => {
     const settings = await settingsRepository.get();
@@ -71,7 +71,7 @@ export function BudgetList(): JSX.Element {
 
   const handleAdd = () => {
     if (!isPro && budgetCount >= FREE_TIER_LIMITS.maxBudgets) {
-      toast.warning('Free tier allows 1 budget. Upgrade to Pro for unlimited budgets.');
+      setShowProModal(true);
       return;
     }
     setIsFormOpen(true);
@@ -168,6 +168,22 @@ export function BudgetList(): JSX.Element {
       >
         <BudgetForm onSuccess={handleFormClose} onCancel={handleFormClose} />
       </BottomSheet>
+
+      <ProUpgradeModal
+        isOpen={showProModal}
+        onClose={() => setShowProModal(false)}
+        feature="Unlimited Budgets"
+        benefits={[
+          'Create unlimited budgets',
+          'Track all your spending categories',
+          'Unlimited transactions',
+          'Dark mode',
+          'Multi-currency support',
+          'Data export (CSV, JSON, PDF)',
+          'Advanced debt tracking',
+          'Full health score breakdown'
+        ]}
+      />
     </div>
   );
 }

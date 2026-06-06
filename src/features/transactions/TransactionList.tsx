@@ -92,7 +92,14 @@ export function TransactionList(): JSX.Element {
   return (
     <div className="min-h-screen bg-mc-bg-base px-4 py-6">
       <div className="mb-6 flex items-center justify-between">
-        <h1 className="text-2xl font-bold text-mc-text-1">Transactions</h1>
+        <div>
+          <h1 className="text-2xl font-bold text-mc-text-1">Transactions</h1>
+          {!isPro && (
+            <p className="text-sm text-mc-text-3 mt-1">
+              {transactionCount}/{FREE_TIER_LIMITS.maxTransactions} transactions used
+            </p>
+          )}
+        </div>
         <Button onClick={handleAdd} size="sm">
           <Plus size={16} className="mr-1" />
           Add

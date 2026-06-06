@@ -9,15 +9,15 @@ import { formatCurrency } from '../../services/money';
 import { Goal } from '../../types';
 import { GoalForm } from './GoalForm';
 import { FREE_TIER_LIMITS } from '../../lib/constants';
-import { useToast } from '../../design-system/components/Toast';
+import { ProUpgradeModal } from '../settings/ProUpgradeModal';
 
 export function GoalList(): JSX.Element {
   const [goals, setGoals] = useState<Goal[]>([]);
   const [isFormOpen, setIsFormOpen] = useState(false);
+  const [showProModal, setShowProModal] = useState(false);
   const [currency, setCurrency] = useState('SGD');
   const [isPro, setIsPro] = useState(false);
   const [goalCount, setGoalCount] = useState(0);
-  const toast = useToast();
 
   const loadData = async () => {
     const settings = await settingsRepository.get();
@@ -35,7 +35,7 @@ export function GoalList(): JSX.Element {
 
   const handleAdd = () => {
     if (!isPro && goalCount >= FREE_TIER_LIMITS.maxGoals) {
-      toast.warning('Free tier allows 1 goal. Upgrade to Pro for unlimited goals.');
+      setShowProModal(true);
       return;
     }
     setIsFormOpen(true);
@@ -157,6 +157,22 @@ export function GoalList(): JSX.Element {
       >
         <GoalForm onSuccess={handleFormClose} onCancel={handleFormClose} />
       </BottomSheet>
+
+      <ProUpgradeModal
+        isOpen={showProModal}
+        onClose={() => setShowProModal(false)}
+        feature="Unlimited Goals"
+        benefits={[
+          'Create unlimited savings goals',
+          'Track all your financial milestones',
+          'Unlimited transactions',
+          'Unlimited budgets',
+          'Dark mode',
+          'Multi-currency support',
+          'Data export (CSV, JSON, PDF)',
+          'Full health score breakdown'
+        ]}
+      />
     </div>
   );
 }
