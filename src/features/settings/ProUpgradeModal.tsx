@@ -1,6 +1,8 @@
 import { Crown, Check } from 'lucide-react';
 import { Modal, Button } from '../../design-system/components';
 import { PRO_PRICE_SGD } from '../../lib/constants';
+import { settingsRepository } from '../../db/repositories/settings.repository';
+import { useToast } from '../../design-system/components/Toast';
 
 interface ProUpgradeModalProps {
   isOpen: boolean;
@@ -10,9 +12,28 @@ interface ProUpgradeModalProps {
 }
 
 export function ProUpgradeModal({ isOpen, onClose, feature, benefits }: ProUpgradeModalProps): JSX.Element {
-  const handleUpgrade = () => {
-    alert('Pro upgrade functionality will be implemented in a future release. This is a placeholder.');
-    onClose();
+  const toast = useToast();
+
+  const handleUpgrade = async () => {
+    try {
+      // For testing purposes: unlock Pro immediately without payment
+      await settingsRepository.update({
+        isPro: true,
+        proUnlockedAt: Date.now(),
+      });
+
+      toast.success('🎉 Clarity Pro unlocked! Reloading...');
+
+      // Reload page to apply Pro features
+      setTimeout(() => {
+        window.location.reload();
+      }, 1000);
+
+      onClose();
+    } catch (error) {
+      toast.error('Failed to unlock Pro');
+      console.error('Pro unlock error:', error);
+    }
   };
 
   return (
