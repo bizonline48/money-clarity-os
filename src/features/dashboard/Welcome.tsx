@@ -37,20 +37,13 @@ export function Welcome(): JSX.Element {
       <div className="mx-auto max-w-2xl">
         <div className="mb-8 text-center">
           <div className="mb-6 flex justify-center">
-            <svg
-              width="120"
-              height="120"
-              viewBox="0 0 120 120"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <rect width="120" height="120" rx="24" fill="#E8F5EE" />
-              <path
-                d="M60 30L75 45H65V75H55V45H45L60 30Z"
-                fill="#16653A"
-              />
-              <rect x="40" y="80" width="40" height="8" rx="4" fill="#16653A" />
-            </svg>
+            <img
+              src="/pwa-512x512.png"
+              alt="Money Clarity OS"
+              width={120}
+              height={120}
+              className="rounded-mc-lg"
+            />
           </div>
 
           <h1 className="mb-3 text-4xl font-bold text-mc-text-1">
